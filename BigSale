@@ -1,0 +1,47 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.*;
+
+public class Main {
+    private static int N;
+    public static void main(String[] args){
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        try {
+            //Get number of test cases.
+            int T = Integer.parseInt(reader.readLine());
+            int test = 0;
+
+            //Loop for the number of test cases
+            while (test < T){
+                //Get number of recipes types
+                N = Integer.parseInt(reader.readLine());
+                //Loop for number of recipes types
+                int recipe = 0;
+                double result = 0;
+                while(recipe < N){
+                    //Get the recipe parameters: price, quantiy and discount
+                    StringTokenizer in = new StringTokenizer(reader.readLine(), " ");
+                    int price = Integer.parseInt(in.nextToken());
+                    int quantity = Integer.parseInt(in.nextToken());
+                    double discount = Float.parseFloat(in.nextToken());
+                    //convert the discount to percentage
+                    discount = discount/100;
+                    //calcuate the new price
+                    double newPrice = (price * discount) + price;
+                    //calcuate the sold price
+                    double soldPrice = newPrice - (newPrice * discount);
+                    //calcuate the loss
+                    result += (price - soldPrice) * quantity;
+                    recipe++;
+                }
+                System.out.println(result);
+
+                test++;
+            }
+
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
